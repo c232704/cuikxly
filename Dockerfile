@@ -19,5 +19,9 @@ COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
 # 设置环境变量
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 
+# 更改用户和组的权限
+RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 755 /var/www/html/runtime
+
 # 暴露容器内部的 80 端口
 EXPOSE 80
