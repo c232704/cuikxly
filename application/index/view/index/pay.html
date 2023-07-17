@@ -1,0 +1,121 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>微信支付</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/static/pay/css/pay.css">
+    <meta name="viewport" content="width=device-width, initial-scale=0.4, minimum-scale=0.4, maximum-scale=0.4">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        //调用微信JS api 支付
+        function jsApiCall()
+        {
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest',
+            <?php echo $jsApiParameters; ?>,
+            function(res){
+                var urlid = <?php echo $data['id'];?>;
+                var bkurl = '';
+                WeixinJSBridge.log(res.err_msg);
+                if(res.err_msg=='get_brand_wcpay_request:ok'){
+                    alert("支付成功");
+                    window.history.back();
+                }else{
+                    alert("支付失败");
+                    //alert(res.err_code+res.err_desc+res.err_msg);
+                }
+            }
+        );
+        }
+
+        function callpay()
+        {
+            if (typeof WeixinJSBridge == "undefined"){
+                if( document.addEventListener ){
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                }else if (document.attachEvent){
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            }else{
+                jsApiCall();
+            }
+        }
+    </script>
+
+</head>
+<body>
+<div class="container">
+    <!--用户信息,login or no -->
+    <div class="header-login clearfix" style="display: none;">
+        <div class="avatar">
+            <img src="<?php echo $data['member']['avatar']; ?>" alt="">
+        </div>
+        <div class="user-info">
+            <p class="user-name no-wrap"><?php echo $data['member']['nickname']; ?></p>
+            <p class="user-balance no-wrap"><?php echo $data['member']['mobile']; ?></p>
+        </div>
+    </div>
+    <!--赠送选择模块：陌号|| 通讯录-->
+
+    <!--momo内对方陌号输入-->
+    <!--浏览器中输入陌号 || 非登录-->
+    <div class="number-block right-transition marginFor">
+        <label class="number-text">订单ID:<span style="font-size: 0.7rem; margin-top: 0.01rem; margin-left: 0.51rem; display: block; float: right;"><?php echo $data['out_trade_no']; ?></span></label>
+    </div>
+    <section>
+        <p class="tap-title">支付金额</p>
+        <input class="other-number" readonly="" id="number" value="￥<?php echo $data['amount']; ?>" type="text">
+        <!--自定义输入金额-->
+        <div class="user-defined-money clearfix" style="display: none;">
+            <span class="right-defined-moji"></span>
+            <label for="defined-input" class="blue">￥</label>
+            <input class="defined-input" id="defined-input" placeholder="输入金额（整数）" type="number">
+            <span class="defined-input" style="display: none;"></span>
+        </div>
+    </section>
+
+    <!--支付方式：外部浏览器用户使用-->
+    <section>
+        <p class="tap-title">支付方式</p>
+        <ul class="type-list">
+            <!--             <li class="type-cell">
+                            <img class="type-avatar" src="pay/1486536061400-alipay.png" alt="">
+                            <label class="type-info" for="type-cell-1">
+                                <p class="type-name">支付宝</p>
+                                <p class="type-des">推荐有支付宝用户使用</p>
+                            </label>
+                            <input checked="" id="type-cell-1" type="radio" class="right-check" name="type-item" value="8">
+                        </li> -->
+            <li class="type-cell">
+                <img class="type-avatar" src="/static/pay/image/1486536061404-weixin.png" alt="">
+                <label class="type-info" for="type-cell-2">
+                    <p class="type-name">微信</p>
+                    <p class="type-des">推荐有微信用户使用</p>
+                </label>
+                <input id="type-cell-2" type="radio" checked="" class="right-check" name="type-item" value="1">
+            </li>
+        </ul>
+        <div style="padding:30px 30px;">
+            <a href='javascript:history.back(-1)' style="width: 100%; display: block; background: #ff0000; border-radius: 10px; color: #ffffff; margin-top: 0.5rem; line-height: 2.5rem; font-size: 1rem; text-align: center;">返回</a>
+        </div>
+</section>
+<section class="empty-div-bottom"></section>
+<footer>
+    实付￥<span class="money-totle"><?php echo $data['amount']; ?></span>
+    <?php if($data['type']==1){ ?>
+    <span onclick="callpay()" class="pay-btn btn-blue">确认支付</span>
+    <?php }else{ ?>
+    <span  class="pay-btn btn-blue"><?php echo $zt[$data['type']]; ?></span>
+    <?php } ?>
+    <div style="display: none;" id="iPhoneX-bottom"></div>
+</footer>
+</div>
+
+</body>
+</html>

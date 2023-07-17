@@ -1,0 +1,184 @@
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label for="c-name" class="control-label col-xs-12 col-sm-2">{:__('标题')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-name" data-rule="required" class="form-control" name="row[name]" type="text" value="{$row.name|htmlentities}">
+        </div>
+    </div>
+    {eq name="row.lx" value="1"}
+        <div id="spwz">
+            <div class="form-group">
+                <label for="c-type" class="control-label col-xs-12 col-sm-2">{:__('视频分类')}:</label>
+                <div class="col-xs-12 col-sm-4">
+                   {:build_select('row[type][]', $groupdata, $groupids, ['class'=>'form-control selectpicker', 'multiple'=>''])}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="c-adddd" class="control-label col-xs-12 col-sm-2">{:__('视频地区')}:</label>
+                <div class="col-xs-12 col-sm-4">
+                   {:build_select('row[adddd][]', $adddddata, $addddid, ['class'=>'form-control selectpicker', 'multiple'=>''])}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="c-yearq" class="control-label col-xs-12 col-sm-2">{:__('视频年份')}:</label>
+                <div class="col-xs-12 col-sm-4">
+                   {:build_select('row[yearq]', $yearqdata, $row['yearq'], ['class'=>'form-control'])}
+                </div>
+            </div>
+        </div>
+     {/eq}
+     {eq name="row.lx" value="2"}
+        <div class="form-group">
+            <label for="c-type2" class="control-label col-xs-12 col-sm-2">{:__('音频分类')}:</label>
+            <div class="col-xs-12 col-sm-4">
+               {:build_select('row[type2][]', $type2data, $groupids, ['class'=>'form-control selectpicker', 'multiple'=>''])}
+            </div>
+        </div>
+     {/eq}
+     {eq name="row.lx" value="3"}
+        <div class="form-group">
+            <label for="c-type3" class="control-label col-xs-12 col-sm-2">{:__('小说分类')}:</label>
+            <div class="col-xs-12 col-sm-4">
+               {:build_select('row[type3][]', $type3data, $groupids, ['class'=>'form-control selectpicker', 'multiple'=>''])}
+            </div>
+        </div>
+    {/eq}
+    {eq name="row.lx" value="4"}
+        <div class="form-group">
+            <label for="c-type4" class="control-label col-xs-12 col-sm-2">{:__('图片分类')}:</label>
+            <div class="col-xs-12 col-sm-4">
+               {:build_select('row[type4][]', $type4data, $groupids, ['class'=>'form-control selectpicker', 'multiple'=>''])}
+            </div>
+        </div>
+    {/eq}
+    {eq name="row.lx" value="5"}
+        <div class="form-group">
+            <label for="c-type4" class="control-label col-xs-12 col-sm-2">{:__('图文分类')}:</label>
+            <div class="col-xs-12 col-sm-4">
+               {:build_select('row[type5][]', $type5data, $groupids, ['class'=>'form-control selectpicker', 'multiple'=>''])}
+            </div>
+        </div>
+    {/eq}
+    <div class="form-group" style="display:none;">
+        <label for="c-lx" class="control-label col-xs-12 col-sm-2">{:__('类型')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[lx]', ['1'=>__('视频'), '2'=>__('音频'), '3'=>__('小说'), '4'=>__('图片'), '5'=>__('图文')], $row['lx'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-avatar" class="control-label col-xs-12 col-sm-2">{:__('缩略图')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+                <input id="c-avatar" data-rule="" class="form-control" size="50" name="row[img]" type="text" value="{$row.img|htmlentities}">
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="plupload-avatar" class="btn btn-danger plupload" data-input-id="c-avatar" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-avatar"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                    <span><button type="button" id="fachoose-avatar" class="btn btn-primary fachoose" data-input-id="c-avatar" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                </div>
+                <span class="msg-box n-right" for="c-avatar"></span>
+            </div>
+            <ul class="row list-inline plupload-preview" id="p-avatar"></ul>
+        </div>
+    </div>
+    {eq name="row.lx" value="4"}
+    <div class="form-group">
+        <label for="c-info1" class="control-label col-xs-12 col-sm-2">{:__('图片集')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+                <input id="c-info1" data-rule="" class="form-control" size="50" name="row[pic]" type="hidden" value="{$row.pic|htmlentities}">
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="plupload-info1" class="btn btn-danger plupload" data-input-id="c-info1" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="true" data-preview-id="p-info1"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                    <span><button type="button" id="fachoose-info1" class="btn btn-primary fachoose" data-input-id="c-info1" data-mimetype="image/*" data-multiple="true"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                </div>
+                <span class="msg-box n-right" for="c-info1"></span>
+            </div>
+            <ul class="row list-inline plupload-preview" id="p-info1"></ul>
+        </div>
+    </div>
+     {/eq}
+    <div class="form-group">
+        <label for="c-uname" class="control-label col-xs-12 col-sm-2">{:__('用户ID')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <div class="input-group">
+                <input id="c-uname"  class="form-control" size="50" name="row[uname]" type="text" value="{$row.uname|htmlentities}">
+                <input id="c-uid" class="form-control" size="50" name="row[uid]" type="hidden" value="{$row.uid|htmlentities}">
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="fachoose-name" class="btn btn-primary fachooseuser" data-uid="c-uid" data-uname="c-uname"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-price" class="control-label col-xs-12 col-sm-2">{:__('普通价格')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-price" data-rule="required" class="form-control" name="row[price]" type="text" value="{$row.price|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-vipprice" class="control-label col-xs-12 col-sm-2">{:__('VIP价格')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-vipprice" data-rule="required" class="form-control" name="row[vipprice]" type="text" value="{$row.vipprice|htmlentities}">
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="c-text" class="control-label col-xs-12 col-sm-2">{:__('简介')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-text" data-rule="required" class="form-control" name="row[text]" type="text" placeholder="简介" value="{$row.text|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-story" class="control-label col-xs-12 col-sm-2">{:__('剧情介绍')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea id="c-story" class="form-control" placeholder="剧情介绍" name="row[story]">{$row.story}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-give" class="control-label col-xs-12 col-sm-2">{:__('点赞')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-give" data-rule="required" class="form-control" name="row[give]" type="text" placeholder="点赞" value="{$row.give|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-forward" class="control-label col-xs-12 col-sm-2">{:__('转发')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-forward" data-rule="required" class="form-control" name="row[forward]" type="text" placeholder="转发" value="{$row.forward|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-views" class="control-label col-xs-12 col-sm-2">{:__('浏览量')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-views" data-rule="required" class="form-control" name="row[views]" type="text" placeholder="转发" value="{$row.views|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-sum" class="control-label col-xs-12 col-sm-2">{:__('总集数')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-sum" data-rule="required" class="form-control" name="row[sum]" type="text" placeholder="总集数" value="{$row.sum|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-ishot" class="control-label col-xs-12 col-sm-2">{:__('是否推荐')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[ishot]', ['1'=>__('未推荐'), '2'=>__('已推荐')], $row['ishot'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-info" class="control-label col-xs-12 col-sm-2">{:__('详情')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea id="c-info" data-rule="required" class="form-control editor" name="row[info]">{$row.info}</textarea>
+        </div>
+    </div> 
+    <div class="form-group">
+        <label for="content" class="control-label col-xs-12 col-sm-2">{:__('Status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[status]', ['normal'=>__('Normal'), 'hidden'=>__('Hidden')], $row['status'])}
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,60 @@
+/*!newwap:page/index/index.scss*/
+body {
+    background: url(body_bg@2x_e3621a6.png) no-repeat #fff;
+    background-size: 100% auto
+}
+
+body #container {
+    display: block;
+    text-decoration: none
+}
+
+body #container .slogan-warpper {
+    padding-top: .84rem;
+    text-align: center
+}
+
+body #container .slogan-warpper img {
+    width: 3.78rem;
+    height: auto
+}
+
+body #container .cellphone-warpper {
+    padding-top: .4rem;
+    text-align: center
+}
+
+body #container .cellphone-warpper img {
+    width: 6.12rem;
+    height: auto
+}
+
+body #container .button-warpper {
+    padding-bottom: .2rem
+}
+
+body #container .button-warpper .button {
+    position: relative;
+    display: block;
+    width: 3rem;
+    height: .8rem;
+    margin: 0 auto;
+    padding-left: .5rem;
+    background: #fff;
+    border-radius: .82rem;
+    line-height: .8rem;
+    font-size: 18px;
+    color: #999;
+    text-align: center;
+}
+
+body #container .button-warpper .button:before {
+    position: absolute;
+    width: .64rem;
+    height: .64rem;
+    top: .08rem;
+    left: .46rem;
+    background: url(icon_download@2x_8f0ec52.png) 0 center;
+    background-size: 100% auto;
+    content: ''
+}

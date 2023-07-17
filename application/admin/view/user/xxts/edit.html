@@ -1,0 +1,45 @@
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label for="c-name" class="control-label col-xs-12 col-sm-2">{:__('标题')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-name" data-rule="required" class="form-control" name="row[name]" type="text" value="{$row.name|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-info" class="control-label col-xs-12 col-sm-2">{:__('推送内容')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-info" data-rule="required" class="form-control" name="row[info]" type="text" value="{$row.info|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-url" class="control-label col-xs-12 col-sm-2">{:__('推送地址')}:</label>
+        <div class="col-xs-12 col-sm-4">
+           <select class="form-control selectpicker" name="row[url]" >
+               <option value="{$row.url|htmlentities}" selected="selected">{$row.url|htmlentities}</option>
+               <option value="pages/client/index">首页</option>
+               <option value="pages/client/tuan/detail">视频</option>
+               <option value="pages/client/tuan/info">音频</option>
+               <option value="pages/client/tuan/info">文章小说</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-urlid" class="control-label col-xs-12 col-sm-2">{:__('推送id')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-urlid" class="form-control" name="row[urlid]" value="{$row.urlid|htmlentities}" type="text">
+        </div>
+    </div>
+     <div class="form-group">
+        <label for="content" class="control-label col-xs-12 col-sm-2">{:__('是非推送')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[type]', ['1'=>__('未推送'), '2'=>__('已推送')], $row['type'])}
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html style="font-size: 100px;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>APP下载</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1,maximum-scale=1,minimal-ui">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keywords" content="APP下载">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1">
+    <script src="/assets/libs/jquery/dist/jquery.min.js?v=1619157096"></script>
+    <script src="/assets/libs/fastadmin-layer/dist/layer.js?v=1619157592"></script>
+    <script>!function () {
+        function e(e) {
+            return this.config = e, this
+        }
+        e.prototype = {
+            reset: function () {
+                var e = this.config && this.config.baseline && !isNaN(this.config.baseline) ? this.config.baseline : 750,
+                    n = Math.min(document.documentElement.clientWidth, e) / e * 100;
+                document.documentElement.style.fontSize = n + "px";
+                var t = parseFloat(window.getComputedStyle(document.documentElement).fontSize), o = n / t;
+                1 != o && (document.documentElement.style.fontSize = n * o + "px")
+            }
+        }, window.Adapter = new e(window.ADAPTER_CONF || {}), window.Adapter.reset(), window.onload = function () {
+            window.Adapter.reset()
+        }, window.onresize = function () {
+            window.Adapter.reset()
+        }
+    }();</script>
+    <style>
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline
+    }
+
+    article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+        display: block
+    }
+
+    body {
+        line-height: 1
+    }
+
+    ol, ul {
+        list-style: none
+    }
+
+    blockquote, q {
+        quotes: none
+    }
+
+    blockquote:before, blockquote:after, q:before, q:after {
+        content: '';
+        content: none
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0
+    }
+
+    html {
+        font-size: 100px
+    }
+
+    body {
+        font-size: 12px;
+        -webkit-text-size-adjust: 100% !important
+        
+    }
+    #input {position: absolute;top: 0;left: 0;opacity: 0;z-index: -10;}
+    html {
+        font-family: -apple-system, BlinkMacSystemFont, STHeiti, 'Microsoft YaHei', Helvetica, Arial, sans-serif
+    }
+    :not(input,textarea) {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none
+    }
+    .dfsdf{
+        width:50%;
+        border-radius: 5px; 
+        background:#ddd; 
+        background: rgba(0,0,0,0.3);
+        margin-left:25%; 
+        padding-top: 0px;  
+        line-height:30px; 
+        font-size: 14px; 
+        color: #fff; 
+        margin-bottom: 20px;
+        text-align:center;
+        display: none;
+    }
+        #weixin-tip{display:none;position:fixed;left:0;top:0;background:rgba(0,0,0,0.8);filter:alpha(opacity=80);width:100%;height:100%;z-index:100;}
+        #weixin-tip p{text-align:center;margin-top:10%;padding:0 5%;position:relative;}
+        #weixin-tip .close{color:#fff;padding:5px;font:bold 20px/24px simsun;text-shadow:0 1px 0 #ddd;position:absolute;top:0;left:5%;}
+    </style>
+    <link rel="stylesheet" href="index_6e7b938.css">
+</head>
+<body>
+<!--<img id="weixinShareLogo" src="icon_16674815ec4bd46a3b51cdc435b4f345.png" style="position:absolute;top:-1000px;left:-1000px;">-->
+<a id="container" href="#" data-app-download-position="home-site">
+    <div class="slogan-warpper"><img src="slogan@2x_9020aca.png" alt="slogan"></div>
+    <div class="cellphone-warpper"><img src="iphone@2x_0c3a658.png" alt="cellphone"></div>
+    <div onclick="copyText()" class="dfsdf" id="dfsdf">
+        <span>邀请码:</span>
+        <span id="text"></span>
+        <textarea id="input"></textarea>
+        <!--<span id="fzcg">点击复制</span>-->
+    </div>
+    <div id="containersdl" style="display:none;"  class="button-warpper"><span class="button">APP下载</span></div>
+    <div id="containers" style="display:none;" class="button-warpper"><span class="button">下载APP</span></div>
+</a>
+<div id="weixin-tip"><p><img src="live_weixin.png" style="width: 100%;" alt="微信打开" /><span id="close" title="关闭" class="close">×</span></p></div>
+<script>
+    var iswx=''
+    if(getQueryVariable('iswx')){
+        iswx=getQueryVariable('iswx')
+    }
+    if(iswx){
+        $("#containersdl").hide()
+        $("#containers").show()
+    }else{
+        $("#containersdl").show()
+        $("#containers").hide()
+    }
+    if(iswx && is_weixin()){
+        var winHeight = typeof window.innerHeight != 'undefined' ? window.innerHeight : document.documentElement.clientHeight;
+        var tip = document.getElementById('weixin-tip');
+        tip.style.height = winHeight + 'px'; //兼容IOS弹窗整屏
+        tip.style.display = 'block';
+        //location.href = 'weixin://app/wx5aa333606550dfd5/jumpWxa/?userName=gh_9b786f6dbff5';
+    }else{
+    
+        
+    }
+    $("#containersdl").click(function(){
+        var id=1;
+        if(getQueryVariable('id')){
+           id =getQueryVariable('id')
+        }
+        window.open("/index/index/login?id="+id+"&v="+Math.random(), "_self");
+    });
+    
+    if(getQueryVariable('id')){
+       document.getElementById("text").innerHTML = getQueryVariable('id');
+       var oImg2 = document.getElementById("dfsdf");
+       oImg2.style.display = "block";
+    }
+    function copyText() {
+          var text = document.getElementById("text").innerText;
+          var input = document.getElementById("input");
+          input.setAttribute("readonly", "readonly");//设置只读
+          input.value = text; // 修改文本框的内容
+          input.select(); // 选中文本
+          document.execCommand("copy"); // 执行浏览器复制命令
+          alert("复制成功");
+    }
+    function getQueryVariable(variable)
+    {
+           var query = window.location.search.substring(1);
+           var vars = query.split("&");
+           for (var i=0;i<vars.length;i++) {
+                   var pair = vars[i].split("=");
+                   if(pair[0] == variable){return pair[1];}
+           }
+           return(false);
+    }
+    function is_weixin() {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    window.onload = function () {
+        var winHeight = typeof window.innerHeight != 'undefined' ? window.innerHeight : document.documentElement.clientHeight; //兼容IOS，不需要的可以去掉
+        var btn = document.getElementById('containers');
+        var tip = document.getElementById('weixin-tip');
+        var close = document.getElementById('close');
+        if (is_weixin()) {
+            btn.onclick = function (e) {
+                
+                tip.style.height = winHeight + 'px'; //兼容IOS弹窗整屏
+                tip.style.display = 'block';
+                return false;
+            }
+            close.onclick = function () {
+                tip.style.display = 'none';
+            }
+        }else{
+            btn.onclick = function (e) {
+                $.ajax({
+            		url:"/api/index/index",
+            		data:{},
+            		type:"GET",
+            		dataType : "json",
+            		success:function (data) {
+            				console.log('下载地址', data.data.config.site.xzdz)
+            				window.open(data.data.config.site.xzdz,"_self");
+            		}
+            	});
+                
+            }
+        }
+    }
+</script>
+</body>
+</html>

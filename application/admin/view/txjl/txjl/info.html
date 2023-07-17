@@ -1,0 +1,58 @@
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label for="c-money" class="control-label col-xs-12 col-sm-2">{:__('提现金额')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-money" data-rule="required" class="form-control" type="text" value="{$row.money|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-sxf" class="control-label col-xs-12 col-sm-2">{:__('手续费')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-sxf" data-rule="required" class="form-control"  type="text"  value="{$row.sxf|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-moneydz" class="control-label col-xs-12 col-sm-2">{:__('实际到账')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-moneydz" data-rule="required" class="form-control" type="number" value="{$row.moneydz|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-type" class="control-label col-xs-12 col-sm-2">{:__('类型')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-type" data-rule="required" class="form-control" type="text" value="{$row.type|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-name" class="control-label col-xs-12 col-sm-2">{:__('提现姓名')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-name" data-rule="required" class="form-control" type="text" value="{$row.name|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-cord" class="control-label col-xs-12 col-sm-2">{:__('提现帐号')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-cord" data-rule="required" class="form-control" type="text" value="{$row.cord|htmlentities}">
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="c-iscl" class="control-label col-xs-12 col-sm-2">{:__('是否审核')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[iscl]', ['1'=>__('未审核'), '2'=>__('已审核'), '3'=>__('已驳回')], $row['iscl'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-memoj" class="control-label col-xs-12 col-sm-2">{:__('备注')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-memoj" class="form-control" name="row[memoj]" type="text" value="{$row.memoj|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,155 @@
+<!--<script src="https://cdn-go.cn/cdn/vod-js-sdk-v6/latest/vod-js-sdk-v6.js"></script>-->
+<script src="http://imgcache.qq.com/open/qcloud/js/vod/sdk/ugcUploader.js"></script>
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label for="c-name" class="control-label col-xs-12 col-sm-2">{$lxname}{:__('标题')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-name" data-rule="required" class="form-control" name="row[name]" type="text" value="{$row.name|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-pid" class="control-label col-xs-12 col-sm-2">{:__('pid')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-pid" data-rule="required" class="form-control" name="row[pid]" type="text" value="{$row.pid|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-avatar" class="control-label col-xs-12 col-sm-2">{$lxname}{:__('缩略图')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+                <input id="c-avatar" data-rule="" class="form-control" size="50" name="row[img]" type="text" value="{$row['img']}">
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="plupload-avatar" class="btn btn-danger plupload" data-input-id="c-avatar" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-avatar"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                    <span><button type="button" id="fachoose-avatar" class="btn btn-primary fachoose" data-input-id="c-avatar" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                </div>
+                <span class="msg-box n-right" for="c-avatar"></span>
+            </div>
+            <ul class="row list-inline plupload-preview" id="p-avatar"></ul>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-price" class="control-label col-xs-12 col-sm-2">{:__('普通价格')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-price" data-rule="required" class="form-control" name="row[price]" type="text" value="{$row['price']}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-vipprice" class="control-label col-xs-12 col-sm-2">{:__('VIP价格')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-vipprice" data-rule="required" class="form-control" name="row[vipprice]" type="text" value="{$row['vipprice']}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-weigh" class="control-label col-xs-12 col-sm-2">{:__('权重')}:</label>
+        <div class="col-xs-12 col-sm-4">
+            <input id="c-weigh" data-rule="required" class="form-control" name="row[weigh]" type="number" value="{$row['weigh']}">
+        </div>
+    </div>
+    <div class="form-group" style="display: none">
+        <label for="c-lx" class="control-label col-xs-12 col-sm-2">{:__('类型')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[lx]', ['1'=>__('视频'), '2'=>__('音频'), '3'=>__('文章')], $Videolist['lx'])}
+        </div>
+    </div>
+    {if ($lx!='wenz')} 
+    <div class="form-group">
+        <label for="c-videourl" class="control-label col-xs-12 col-sm-2">{$lxname}{:__('地址')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+                <input id="c-videourl" data-rule="" class="form-control" name="row[videourl]" type="text" value="{$row['videourl']}">
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="plupload-videourl" class="btn btn-danger plupload" data-input-id="c-videourl" data-mimetype="{$lx}" data-multiple="false" data-preview-id="p-videourl"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                    <span><button type="button" id="fachoose-videourl" class="btn btn-primary fachoose" data-input-id="c-videourl" data-mimetype="{$lx}" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                    <span><button type="button" id="btntxy" class="btn btn-danger" onclick="getposts()"><i class="fa fa-upload"></i> {:__('腾讯云')}</button></span>
+                </div>
+                <span class="msg-box n-right" for="c-videourl"></span>
+            </div>
+            <ul class="row list-inline plupload-preview" id="p-videourl"></ul>
+        </div>
+    </div>
+    <div class="form-group" style="display:none">
+        <input id="c-videourl1" onchange="getpost()" data-rule="" class="form-control"  type="file">
+        <input id="c-fileId"  data-rule="" class="form-control" name="row[fileId]" value="{$row['fileId']}">
+    </div>
+    {/if}
+    <div class="form-group">
+        <label for="content" class="control-label col-xs-12 col-sm-2">{:__('Status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[status]', ['normal'=>__('Normal'), 'hidden'=>__('Hidden')], $row['status'])}
+        </div>
+        <!--<button type="button" class="btn btn-primary" onclick="getpost()"><i class="fa fa-list"></i> {:__('Upload')}</button>-->
+    </div>
+    <div class="form-group">
+        <label for="c-info" class="control-label col-xs-12 col-sm-2">{:__('内容')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea id="c-info" class="form-control editor" name="row[info]">{$row['info']}</textarea>
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>
+<script>
+    var getSignature = function(callback){
+        $.ajax({
+            type: "POST",
+            url: "/VwmRIfEYDH.php/video/video/getsignature",
+            data:{yhm:''},
+            dataType: 'json',
+            success: function (msg) {
+                if(msg.code==1){
+                    callback(msg.signature) 
+                }else{
+                    layer.msg(msg.msg, {icon: 2,anim: 6});
+                }
+            },
+            error: function (error) {
+                layer.msg('获取签名错误!', {icon: 2,anim: 6});
+            }
+        });
+    };
+    function getposts(){
+        $('#c-videourl1').click();
+    }
+    function getpost(){
+        var resultMsg = qcVideo.ugcUploader.start({
+            videoFile: $('#c-videourl1')[0].files[0],
+            //coverFile: $('#pics')[0].files[0],//封面，类型为 File
+            getSignature: getSignature,
+            error: function(result){
+                console.log('上传失败的文件类型：' + result.type);
+                console.log('上传失败的原因：' + result.msg);
+            },
+            progress: function(result){
+                var r=result.curr*100;
+                console.log('上传进度：' + r);
+                // $('#show_dfd').css('display','block');
+                // $('#ssa').css('width',r+'%');
+                $('#btntxy').html('<i class="fa fa-upload"></i> '+parseInt(r)+'%');
+            },
+            finish: function(result){
+                $('#c-videourl').val(result.videoUrl);
+                $('#c-fileId').val(result.fileId);
+                $('#btntxy').html('<i class="fa fa-upload"></i> 腾讯云');
+                
+                // $('#kuc').val(result.fileId);
+                // $('#pic').val(result.coverUrl);
+                // $('#picimg').attr('src',result.coverUrl).show();
+                // $("#vurl").attr("readonly","readonly");
+                // $("#kuc").attr("readonly","readonly");
+                // $('#show_dfd').css('display','none');
+                // $("#pics_but i").html('&#xe60d;');
+                // $("#vurls_but i").html('&#xe6ed;');
+                console.log('上传结果的 fileId：' + result.fileId);
+                console.log('上传结果的视频名称：' + result.videoName);
+                console.log('上传结果的视频地址：' + result.videoUrl);
+                console.log('上传结果的封面名称：' + result.coverName);
+                console.log('上传结果的封面地址：' + result.coverUrl);
+            }
+        });
+    }
+</script>
