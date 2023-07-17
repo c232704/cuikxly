@@ -25,3 +25,5 @@ RUN chmod -R 755 /var/www/html/runtime
 
 # 暴露容器内部的 80 端口
 EXPOSE 80
+
+RUN a2enmod rewrite
