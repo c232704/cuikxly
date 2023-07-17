@@ -16,15 +16,15 @@ return [
     // 数据库类型
     'type'            => Env::get('database.type', 'mysql'),
     // 服务器地址
-    'hostname'        => Env::get('database.hostname', '127.0.0.1'),
+    'hostname'        => Env::get('database.hostname', 'sh-cynosdbmysql-grp-h832791y.sql.tencentcdb.com'),
     // 数据库名
-    'database'        => Env::get('database.database', 'xjc_demo_hongcd_'),
+    'database'        => Env::get('database.database', 'kxlyi'),
     // 用户名
-    'username'        => Env::get('database.username', 'xjc_demo_hongcd_'),
+    'username'        => Env::get('database.username', 'root'),
     // 密码
-    'password'        => Env::get('database.password', 'yA4GW4RKkZdeyeXh'),
+    'password'        => Env::get('database.password', 'Cuixiangyu123'),
     // 端口
-    'hostport'        => Env::get('database.hostport', ''),
+    'hostport'        => Env::get('database.hostport', '21301'),
     // 连接dsn
     'dsn'             => '',
     // 数据库连接参数
