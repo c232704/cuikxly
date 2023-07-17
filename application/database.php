@@ -16,7 +16,7 @@ return [
     // 数据库类型
     'type'            => Env::get('database.type', 'mysql'),
     // 服务器地址
-    'hostname'        => Env::get('database.hostname', 'sh-cynosdbmysql-grp-h832791y.sql.tencentcdb.com'),
+    'hostname'        => Env::get('database.hostname', 'sh-cynosdbmysql-grp-ee70ylh2.sql.tencentcdb.com'),
     // 数据库名
     'database'        => Env::get('database.database', 'kxlyi'),
     // 用户名
@@ -24,7 +24,7 @@ return [
     // 密码
     'password'        => Env::get('database.password', 'Cuixiangyu123'),
     // 端口
-    'hostport'        => Env::get('database.hostport', '21301'),
+    'hostport'        => Env::get('database.hostport', '20957'),
     // 连接dsn
     'dsn'             => '',
     // 数据库连接参数
