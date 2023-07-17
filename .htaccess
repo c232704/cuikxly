@@ -1,4 +1,7 @@
 RewriteEngine On
+RewriteBase /
 
-# 示例：将 /article/123 重写为 /article.php?id=123
-RewriteRule ^article/([0-9]+)$ article.php?id=$1 [QSA,L]
+# 如果请求的文件或目录不存在，将请求重写到 index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
